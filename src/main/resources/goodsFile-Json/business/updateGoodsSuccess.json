@@ -1,0 +1,17 @@
+{
+  "args":{
+    "updateGoodsDTO":{
+      "retailPrice":100,
+      "marketPrice":120,
+      "hotStatus":0,
+      "brandId":12,
+      "shopId":990,
+      "goodsTreeId":2206,
+      "goodsName":"TestCase2",
+      "goodsImgUrl":"/supplier/20180818/6cf960933b0a1cb42185a6c41e017ebd.gif",
+      "updateTime":1534733710,
+      "id":18,
+      "updateUser":""
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<suite name = "TestSuite">
+    <test name = "TestCase">
+        <classes>
+
+            <class name = "com.to8to.o2o.testScripts.goods.TestCaseGoodsBusinessForUI">
+                <method>
+                <include name = "addGoodsSuccess"/>
+                <include name = "submitGoodsForReviewSuccess"/>
+                <include name = "cancelGoodsForReviewSuccess"/>
+                <include name = "updateGoodsSuccess"/>
+                <include name = "onShelvesGoodsSuccess"/>
+                <include name = "offShelvesGoodsSuccess"/>
+                <include name = "batchOnShelvesGoodsSuccess"/>
+                <include name = "batchOffShelvesGoodsSuccess"/>
+                <include name = "getGoodsListSuccess"/>
+                <include name = "getGoodsListGroupSuccess"/>
+                <include name = "viewGoodsListSuccess"/>
+                </method>
+            </class>
+
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name = "com.to8to.o2o.util.ExtentTestNGIReporterListener"/>
+    </listeners>
+</suite>

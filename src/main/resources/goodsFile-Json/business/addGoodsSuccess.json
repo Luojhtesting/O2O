@@ -1,0 +1,14 @@
+{
+  "args":{
+    "createGoodsDTO":{
+      "retailPrice":100,
+      "marketPrice":120,
+      "hotStatus":0,
+      "brandId":12,
+      "shopId":990,
+      "goodsTreeId":2206,
+      "goodsName":"TestCase1",
+      "goodsImgUrl":"/supplier/20180818/6cf960933b0a1cb42185a6c41e017ebd.gif"
+    }
+  }
+}
