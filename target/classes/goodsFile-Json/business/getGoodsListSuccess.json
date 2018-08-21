@@ -1,0 +1,10 @@
+{
+  "args":{
+    "page":1,
+    "size":20,
+    "listGoodsDTO":{
+      "shopId":990
+
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "args":{
+    "shopId":990,
+    "batchShelvesGoodsDTO":[
+      {
+        "id":19
+      },
+      {
+        "id":20
+      }
+    ]
+  }
+}
