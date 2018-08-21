@@ -41,23 +41,23 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/submitGoods
      */
-    @Test
-    public void submitGoodsForReviewSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\submitGoodsForReviewSuccess.json");
-
-        given()
-            .contentType("application/json")
-            .header("s","/biz/t8t-scm-oos/app")
-            .header("m","views.business.goodsServiceForUI.submitGoods")
-            .body(jsonFile)
-        .when()
-            .post(Contans.Path_TestUrl)
-            //.prettyPeek()
-        .then()
-            .statusCode(200)
-            .body("status",equalTo(200))
-        ;
-    }
+//    @Test
+//    public void submitGoodsForReviewSuccess() {
+//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\submitGoodsForReviewSuccess.json");
+//
+//        given()
+//            .contentType("application/json")
+//            .header("s","/biz/t8t-scm-oos/app")
+//            .header("m","views.business.goodsServiceForUI.submitGoods")
+//            .body(jsonFile)
+//        .when()
+//            .post(Contans.Path_TestUrl)
+//            //.prettyPeek()
+//        .then()
+//            .statusCode(200)
+//            .body("status",equalTo(200))
+//        ;
+//    }
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，商品撤销审核成功
@@ -65,23 +65,23 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/cancelGoods
      */
-    @Test(dependsOnMethods = {"submitGoodsForReviewSuccess"})
-    public void cancelGoodsForReviewSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\cancelGoodsForReviewSuccess.json");
-
-        given()
-            .contentType("application/json")
-            .header("s","/biz/t8t-scm-oos/app")
-            .header("m","views.business.goodsServiceForUI.cancelGoods")
-            .body(jsonFile)
-        .when()
-            .post(Contans.Path_TestUrl)
-            //.prettyPeek()
-        .then()
-            .statusCode(200)
-            .body("status",equalTo(200))
-        ;
-    }
+//    @Test(dependsOnMethods = {"submitGoodsForReviewSuccess"})
+//    public void cancelGoodsForReviewSuccess() {
+//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\cancelGoodsForReviewSuccess.json");
+//
+//        given()
+//            .contentType("application/json")
+//            .header("s","/biz/t8t-scm-oos/app")
+//            .header("m","views.business.goodsServiceForUI.cancelGoods")
+//            .body(jsonFile)
+//        .when()
+//            .post(Contans.Path_TestUrl)
+//            //.prettyPeek()
+//        .then()
+//            .statusCode(200)
+//            .body("status",equalTo(200))
+//        ;
+//    }
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，商品更新成功
@@ -305,22 +305,22 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/setAdvertisingGoods
      */
-    @Test
-    public void setAdvertisingGoodsListSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\setAdvertisingGoodsListSuccess.json");
-
-        given()
-                .contentType("application/json")
-                .header("s","/biz/t8t-scm-oos/app")
-                .header("m","views.business.HomePageManagerServiceForUI.setAdvertisingGoods")
-                .body(jsonFile)
-                .when()
-                .post(Contans.Path_TestUrl)
-                //.prettyPeek()
-                .then()
-                .statusCode(200)
-                .body("status",equalTo(200))
-        ;
-    }
+//    @Test
+//    public void setAdvertisingGoodsListSuccess() {
+//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\setAdvertisingGoodsListSuccess.json");
+//
+//        given()
+//                .contentType("application/json")
+//                .header("s","/biz/t8t-scm-oos/app")
+//                .header("m","views.business.HomePageManagerServiceForUI.setAdvertisingGoods")
+//                .body(jsonFile)
+//                .when()
+//                .post(Contans.Path_TestUrl)
+//                //.prettyPeek()
+//                .then()
+//                .statusCode(200)
+//                .body("status",equalTo(200))
+//        ;
+//    }
 
 }
