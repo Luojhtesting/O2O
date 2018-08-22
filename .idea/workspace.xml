@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73e888dd-30cf-4053-925f-244312c3746d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -16,7 +15,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="621">
@@ -84,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCaseGoodsBusinessForUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestCaseGoodsBusinessForUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-152">
-              <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+            <state relative-caret-position="3458">
+              <caret line="309" column="87" selection-start-line="309" selection-start-column="87" selection-end-line="309" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -100,6 +99,11 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <replaceStrings>
+      <replace>/</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -109,8 +113,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/TestNg.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/datebaseConfig.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java" />
       </list>
     </option>
   </component>
@@ -149,6 +153,51 @@
             <path>
               <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="O2O" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="testScripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O2O" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="testScripts" type="462c0819:PsiDirectoryNode" />
+              <item name="goods" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -324,7 +373,7 @@
       <updated>1534842712531</updated>
       <workItem from="1534842715448" duration="3810000" />
       <workItem from="1534852879671" duration="3130000" />
-      <workItem from="1534900681037" duration="1270000" />
+      <workItem from="1534900681037" duration="1528000" />
     </task>
     <servers />
   </component>
@@ -346,10 +395,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8210000" />
+    <option name="totallyTimeSpent" value="8468000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -546,17 +596,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-152">
-          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
           <caret line="70" column="30" lean-forward="true" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/to8to/o2o/testScripts/goods/TestCaseGoodsBusinessForUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3458">
+          <caret line="309" column="87" selection-start-line="309" selection-start-column="87" selection-end-line="309" selection-end-column="87" />
         </state>
       </provider>
     </entry>

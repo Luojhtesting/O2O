@@ -19,7 +19,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void addGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\addGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -43,7 +43,7 @@ public class TestCaseGoodsBusinessForUI {
      */
 //    @Test
 //    public void submitGoodsForReviewSuccess() {
-//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\submitGoodsForReviewSuccess.json");
+//        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
 //
 //        given()
 //            .contentType("application/json")
@@ -67,7 +67,7 @@ public class TestCaseGoodsBusinessForUI {
      */
 //    @Test(dependsOnMethods = {"submitGoodsForReviewSuccess"})
 //    public void cancelGoodsForReviewSuccess() {
-//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\cancelGoodsForReviewSuccess.json");
+//        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/cancelGoodsForReviewSuccess.json");
 //
 //        given()
 //            .contentType("application/json")
@@ -91,7 +91,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void updateGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\updateGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/updateGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -115,7 +115,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void onShelvesGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\onShelvesGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -139,7 +139,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test(dependsOnMethods = {"onShelvesGoodsSuccess"})
     public void offShelvesGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\offShelvesGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/offShelvesGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -163,7 +163,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void batchOnShelvesGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\batchOnShelvesGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/batchOnShelvesGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -187,7 +187,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test(dependsOnMethods = {"batchOnShelvesGoodsSuccess"})
     public void batchOffShelvesGoodsSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\batchOffShelvesGoodsSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/batchOffShelvesGoodsSuccess.json");
 
         given()
             .contentType("application/json")
@@ -211,7 +211,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void getGoodsListSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\getGoodsListSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getGoodsListSuccess.json");
 
         given()
             .contentType("application/json")
@@ -235,7 +235,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void getGoodsListGroupSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\getGoodsListGroupSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getGoodsListGroupSuccess.json");
 
         given()
             .contentType("application/json")
@@ -259,7 +259,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void viewGoodsListSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\viewGoodsListSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/viewGoodsListSuccess.json");
 
         given()
             .contentType("application/json")
@@ -283,7 +283,7 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void getAdvertisingGoodsListSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\getAdvertisingGoodsListSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getAdvertisingGoodsListSuccess.json");
 
         given()
                 .contentType("application/json")
@@ -307,7 +307,7 @@ public class TestCaseGoodsBusinessForUI {
      */
 //    @Test
 //    public void setAdvertisingGoodsListSuccess() {
-//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\setAdvertisingGoodsListSuccess.json");
+//        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/setAdvertisingGoodsListSuccess.json");
 //
 //        given()
 //                .contentType("application/json")
