@@ -11,20 +11,20 @@ import static org.hamcrest.Matchers.*;
 
 public class TestCase {
     @Test
-    public void GoodsForceOffShelvesSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\GoodsForceOffShelvesSuccess.json");
+    public void getGoodsListSuccess() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/customer/getGoodsListSuccess.json");
 
         given()
                 .contentType("application/json")
                 .header("s","/biz/t8t-scm-oos/app")
-                .header("m","views.platform.goodsServiceForUI.forceOffShelves")
+                .header("m","views.customer.goodsServiceForUI.listGoods")
                 .body(jsonFile)
                 .when()
                 .post(Contans.Path_TestUrl)
                 .prettyPeek()
                 .then()
                 .statusCode(200)
-                .body("",equalTo(""))
+                //.body("",equalTo(""))
         ;
     }
 }

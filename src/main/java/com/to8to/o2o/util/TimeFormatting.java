@@ -1,16 +1,14 @@
-package com.to8to.o2o.testScripts;
+package com.to8to.o2o.util;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
-public class Time {
+public class TimeFormatting {
 
-    public static void main(String[] args) {
-        Date date = new Date();
-        System.out.println(getSecondTimestamp(date));
-    }
-
-    public static int getSecondTimestamp(Date date){
+    /**
+     * 获取时间戳 10位
+     *
+     */
+    public static int setSecondTimestamp(Date date){
         if (null == date) {
             return 0;
         }

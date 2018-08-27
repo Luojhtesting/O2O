@@ -30,33 +30,9 @@ public class TestCaseGoodsCustomerForUI {
             .prettyPeek()
         .then()
             .statusCode(200)
-            .body("",equalTo(""))
+            .body("status",equalTo(200))
         ;
     }
-
-    /**
-     * Title:必填项字段输入为空，非必填输入格式正确，获取商品列表失败
-     * 接口名称 "用户-获取商品列表" views.customer.goodsServiceForUI.listGoods
-     * 请求类型 Https-post
-     * 请求path oos/customer/goodsServiceForUI/listGoods
-     */
-//    @Test
-//    public void getGoodsListFail() {
-//        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\customer\\getGoodsListFail.json");
-//
-//        given()
-//            .contentType("application/json")
-//            .header("s","/biz/t8t-scm-oos/app")
-//            .header("m","views.customer.goodsServiceForUI.listGoods")
-//            .body(jsonFile)
-//        .when()
-//            .post(Contans.Path_TestUrl)
-//            .prettyPeek()
-//        .then()
-//            .statusCode(200)
-//            .body("",equalTo(""))
-//        ;
-//    }
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，获取商品分组成功
@@ -117,16 +93,16 @@ public class TestCaseGoodsCustomerForUI {
         File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\business\\selectRecommendGoodsListSuccess.json");
 
         given()
-                .contentType("application/json")
-                .header("s","/biz/t8t-scm-oos/app")
-                .header("m","views.customer.goodsServiceForUI.selectRecommendGoods")
-                .body(jsonFile)
-                .when()
-                .post(Contans.Path_TestUrl)
-                .prettyPeek()
-                .then()
-                .statusCode(200)
-                .body("",equalTo(""))
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.customer.goodsServiceForUI.selectRecommendGoods")
+            .body(jsonFile)
+        .when()
+            .post(Contans.Path_TestUrl)
+            .prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("",equalTo(""))
         ;
     }
 

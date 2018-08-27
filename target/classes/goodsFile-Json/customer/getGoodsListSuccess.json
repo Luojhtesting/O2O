@@ -1,0 +1,11 @@
+{
+  "args":{
+    "page":"1",
+    "size":"20",
+    "listGoodsDTO":{
+      "shopId":1027,
+      "keyword":1,
+      "sortType":"1"
+    }
+  }
+}
