@@ -1,14 +1,18 @@
 package com.to8to.o2o.testScripts.goods;
 
 import com.to8to.o2o.configuration.Contans;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static com.to8to.o2o.util.FileUtil.fileReadData;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TestCaseGoodsPlatformForUI {
+
+    private static String jsonString;//文件内容
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，获取商品列表成功
@@ -18,7 +22,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void getGoodsListSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\getGoodsListSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/getGoodsListSuccess.json");
 
         given()
             .contentType("application/json")
@@ -42,7 +46,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void getGoodsListCategorySuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\getGoodsListCategorySuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/getGoodsListCategorySuccess.json");
 
         given()
             .contentType("application/json")
@@ -65,14 +69,18 @@ public class TestCaseGoodsPlatformForUI {
      * 请求path oos/platform/goodsServiceForUI/passedGoods
      */
     @Test
-    public void auditGoodsPassedSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\auditGoodsPassedSuccess.json");
+    public static void auditGoodsPassedSuccess() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("goodsId", TestCaseGoodsBusinessForUI.result[0]);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.platform.goodsServiceForUI.passedGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             .prettyPeek()
@@ -90,7 +98,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void auditGoodsRejectSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\auditGoodsRejectSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsRejectSuccess.json");
 
         given()
             .contentType("application/json")
@@ -114,7 +122,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void GoodsForceOffShelvesSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\GoodsForceOffShelvesSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/GoodsForceOffShelvesSuccess.json");
 
         given()
             .contentType("application/json")
@@ -138,7 +146,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void auditGoodsBatchPassedSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\auditGoodsBatchPassedSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsBatchPassedSuccess.json");
 
         given()
             .contentType("application/json")
@@ -162,7 +170,7 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void auditGoodsBatchRejectSuccess() {
-        File jsonFile = new File(".\\src\\main\\resources\\goodsFile-Json\\platform\\auditGoodsBatchRejectSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsBatchRejectSuccess.json");
 
         given()
             .contentType("application/json")

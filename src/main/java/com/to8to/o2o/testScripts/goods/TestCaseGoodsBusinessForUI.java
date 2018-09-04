@@ -1,15 +1,27 @@
 package com.to8to.o2o.testScripts.goods;
 
+import com.google.gson.JsonObject;
 import com.to8to.o2o.configuration.Contans;
+import io.restassured.response.Response;
+import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
+import static com.to8to.o2o.testScripts.goods.TestCaseGoodsPlatformForUI.auditGoodsPassedSuccess;
+import static com.to8to.o2o.util.FileUtil.fileReadData;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 public class TestCaseGoodsBusinessForUI {
+
+    public static int[] result = new int[10];//商品id
+    private static String jsonString;//文件内容
+    private static String assertString;//断言字符
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，商品创建成功
@@ -20,19 +32,27 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void addGoodsSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("createGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
-        given()
+        Response response = given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.addGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
+        .extract()
+            .response()
         ;
+
+        result[0] = response.path("result");
     }
 
     /**
@@ -44,12 +64,17 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void submitGoodsForReviewSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.submitGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -57,6 +82,7 @@ public class TestCaseGoodsBusinessForUI {
             .statusCode(200)
             .body("status",equalTo(200))
         ;
+
     }
 
     /**
@@ -65,15 +91,20 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/cancelGoods
      */
-    @Test(dependsOnMethods = {"submitGoodsForReviewSuccess"})
+    @Test
     public void cancelGoodsForReviewSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/cancelGoodsForReviewSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("cancelGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("cancelGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.cancelGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -92,12 +123,17 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void updateGoodsSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/updateGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("updateGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("updateGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.updateGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -116,12 +152,19 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void onShelvesGoodsSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        submitGoodsForReviewSuccess();//调用提交审核测试用例
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
+        auditGoodsPassedSuccess();//调用审核通过测试用例
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.onShelvesGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -137,15 +180,20 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/offShelvesGoods
      */
-    @Test(dependsOnMethods = {"onShelvesGoodsSuccess"})
+    @Test
     public void offShelvesGoodsSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/offShelvesGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.offShelvesGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -163,13 +211,22 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void batchOnShelvesGoodsSuccess() {
+        addAction(2);
+        submitAction(2);
+        auditGoodsPassedAction(2);
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/batchOnShelvesGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONArray("batchShelvesGoodsDTO").getJSONObject(0).put("id", result[0]);
+        jo.getJSONObject("args").getJSONArray("batchShelvesGoodsDTO").getJSONObject(1).put("id", result[1]);
+        jo.getJSONObject("args").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.batchOnShelvesGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -185,15 +242,22 @@ public class TestCaseGoodsBusinessForUI {
      * 请求类型 Https-post
      * 请求path oos/business/goodsServiceForUI/batchOffShelvesGoods
      */
-    @Test(dependsOnMethods = {"batchOnShelvesGoodsSuccess"})
+    @Test
     public void batchOffShelvesGoodsSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/batchOffShelvesGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONArray("batchShelvesGoodsDTO").getJSONObject(0).put("id", result[0]);
+        jo.getJSONObject("args").getJSONArray("batchShelvesGoodsDTO").getJSONObject(1).put("id", result[1]);
+        jo.getJSONObject("args").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
+
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.batchOffShelvesGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -212,12 +276,16 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void getGoodsListSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getGoodsListSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("listGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.listGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -236,6 +304,10 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void getGoodsListGroupSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getGoodsListGroupSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
@@ -260,36 +332,17 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void viewGoodsListSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/viewGoodsListSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("goodsId", result[0]);
+        jo.getJSONObject("args").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.viewGoods")
-            .body(jsonFile)
-        .when()
-            .post(Contans.Path_TestUrl)
-            //.prettyPeek()
-        .then()
-            .statusCode(200)
-            .body("status",equalTo(200))
-        ;
-    }
-
-    /**
-     * Title:必填项字段输入合法，非必填输入格式正确，获取推荐商品列表成功
-     * 接口名称 "获取推荐商品列表" views.business.HomePageManagerServiceForUI.getAdvertisingGoods
-     * 请求类型 Https-post
-     * 请求path oos/business/HomePageManagerServiceForUI/getAdvertisingGoods
-     */
-    @Test
-    public void getAdvertisingGoodsListSuccess() {
-        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getAdvertisingGoodsListSuccess.json");
-
-        given()
-            .contentType("application/json")
-            .header("s","/biz/t8t-scm-oos/app")
-            .header("m","views.business.HomePageManagerServiceForUI.getAdvertisingGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -324,6 +377,31 @@ public class TestCaseGoodsBusinessForUI {
     }
 
     /**
+     * Title:必填项字段输入合法，非必填输入格式正确，获取推荐商品列表成功
+     * 接口名称 "获取推荐商品列表" views.business.HomePageManagerServiceForUI.getAdvertisingGoods
+     * 请求类型 Https-post
+     * 请求path oos/business/HomePageManagerServiceForUI/getAdvertisingGoods
+     */
+    @Test
+    public void getAdvertisingGoodsListSuccess() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getAdvertisingGoodsListSuccess.json");
+
+        given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.business.HomePageManagerServiceForUI.getAdvertisingGoods")
+            .body(jsonFile)
+        .when()
+            .post(Contans.Path_TestUrl)
+            .prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        ;
+    }
+
+
+    /**
      * Title:必填项字段输入合法，非必填输入格式正确，获取未下架商品列表成功
      * 接口名称 "获取未下架商品列表" views.business.HomePageManagerServiceForUI.getGoods
      * 请求类型 Https-post
@@ -347,4 +425,77 @@ public class TestCaseGoodsBusinessForUI {
 //        ;
 //    }
 
+    public void addAction(int i) {
+        for (int j=0;j<i;j++) {
+            File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
+            jsonString = fileReadData(jsonFile);
+            JSONObject jo = new JSONObject(jsonString);
+            jo.getJSONObject("args").getJSONObject("createGoodsDTO").put("shopId", Contans.shopId);
+            jsonString = jo.toString();
+
+            Response response = given()
+                    .contentType("application/json")
+                    .header("s","/biz/t8t-scm-oos/app")
+                    .header("m","views.business.goodsServiceForUI.addGoods")
+                    .body(jsonString)
+                    .when()
+                    .post(Contans.Path_TestUrl)
+                    //.prettyPeek()
+                    .then()
+                    .statusCode(200)
+                    .body("status",equalTo(200))
+                    .extract()
+                    .response()
+                    ;
+
+            result[j] = response.path("result");
+        }
+    }
+
+    public void submitAction(int i) {
+        for (int j=0;j<i;j++) {
+            File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
+            jsonString = fileReadData(jsonFile);
+            JSONObject jo = new JSONObject(jsonString);
+            jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("id", result[j]);
+            jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("shopId", Contans.shopId);
+            jsonString = jo.toString();
+
+            given()
+                    .contentType("application/json")
+                    .header("s","/biz/t8t-scm-oos/app")
+                    .header("m","views.business.goodsServiceForUI.submitGoods")
+                    .body(jsonString)
+                    .when()
+                    .post(Contans.Path_TestUrl)
+                    //.prettyPeek()
+                    .then()
+                    .statusCode(200)
+                    .body("status",equalTo(200))
+            ;
+        }
+    }
+
+    public void auditGoodsPassedAction(int i) {
+        for (int j=0;j<i;j++) {
+            File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
+            jsonString = fileReadData(jsonFile);
+            JSONObject jo = new JSONObject(jsonString);
+            jo.getJSONObject("args").put("goodsId", result[j]);
+            jsonString = jo.toString();
+
+            given()
+                    .contentType("application/json")
+                    .header("s","/biz/t8t-scm-oos/app")
+                    .header("m","views.platform.goodsServiceForUI.passedGoods")
+                    .body(jsonString)
+                    .when()
+                    .post(Contans.Path_TestUrl)
+                    //.prettyPeek()
+                    .then()
+                    .statusCode(200)
+                    .body("status",equalTo(200))
+            ;
+        }
+    }
 }

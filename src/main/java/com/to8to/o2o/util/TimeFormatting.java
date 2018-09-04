@@ -6,7 +6,6 @@ public class TimeFormatting {
 
     /**
      * 获取时间戳 10位
-     *
      */
     public static int setSecondTimestamp(Date date){
         if (null == date) {

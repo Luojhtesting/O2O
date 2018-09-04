@@ -13,4 +13,9 @@ public class Contans {
 
     //线上环境Url
     public static final String Path_OnlineUrl = "";
+
+    //加盟shopId
+    public static final Integer shopId = 1027;
+
+
 }
