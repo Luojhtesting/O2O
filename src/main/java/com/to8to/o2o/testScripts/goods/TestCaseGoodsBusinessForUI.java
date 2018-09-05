@@ -2,6 +2,7 @@ package com.to8to.o2o.testScripts.goods;
 
 import com.google.gson.JsonObject;
 import com.to8to.o2o.configuration.Contans;
+import com.to8to.o2o.util.FileUtil;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -22,6 +23,7 @@ public class TestCaseGoodsBusinessForUI {
     public static int[] result = new int[10];//商品id
     private static String jsonString;//文件内容
     private static String assertString;//断言字符
+    private static String skuId;
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，商品创建成功
@@ -151,14 +153,14 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void onShelvesGoodsSuccess() {
+        submitGoodsForReviewSuccess();//调用提交审核测试用例
+        auditGoodsPassedSuccess();//调用审核通过测试用例
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
-        submitGoodsForReviewSuccess();//调用提交审核测试用例
         jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("id", result[0]);
         jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("shopId", Contans.shopId);
         jsonString = jo.toString();
-        auditGoodsPassedSuccess();//调用审核通过测试用例
 
         given()
             .contentType("application/json")
@@ -338,7 +340,7 @@ public class TestCaseGoodsBusinessForUI {
         jo.getJSONObject("args").put("shopId", Contans.shopId);
         jsonString = jo.toString();
 
-        given()
+        Response response = given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.goodsServiceForUI.viewGoods")
@@ -349,7 +351,11 @@ public class TestCaseGoodsBusinessForUI {
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
+        .extract()
+            .response()
         ;
+
+        skuId = response.path("result.skuId");
     }
 
     /**
@@ -360,13 +366,20 @@ public class TestCaseGoodsBusinessForUI {
      */
     @Test
     public void setAdvertisingGoodsListSuccess() {
+        onShelvesGoodsAction();
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/setAdvertisingGoodsListSuccess.json");
+        jsonString = FileUtil.fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("cityId", Contans.cityId);
+        jo.getJSONObject("args").getJSONArray("skuIds").put(0,skuId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.HomePageManagerServiceForUI.setAdvertisingGoods")
-            .body(jsonFile)
+            .header("rpc-uid","12331")
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             //.prettyPeek()
@@ -385,15 +398,19 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void getAdvertisingGoodsListSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getAdvertisingGoodsListSuccess.json");
+        jsonString = FileUtil.fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("cityId", Contans.cityId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.business.HomePageManagerServiceForUI.getAdvertisingGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
-            .prettyPeek()
+            //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
@@ -425,7 +442,7 @@ public class TestCaseGoodsBusinessForUI {
 //        ;
 //    }
 
-    public void addAction(int i) {
+    public static void addAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -452,7 +469,7 @@ public class TestCaseGoodsBusinessForUI {
         }
     }
 
-    public void submitAction(int i) {
+    public static void submitAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -476,7 +493,7 @@ public class TestCaseGoodsBusinessForUI {
         }
     }
 
-    public void auditGoodsPassedAction(int i) {
+    public static void auditGoodsPassedAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -497,5 +514,27 @@ public class TestCaseGoodsBusinessForUI {
                     .body("status",equalTo(200))
             ;
         }
+    }
+
+    public static void onShelvesGoodsAction() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("id", result[0]);
+        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
+
+        given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.business.goodsServiceForUI.onShelvesGoods")
+            .body(jsonString)
+        .when()
+            .post(Contans.Path_TestUrl)
+            //.prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        ;
     }
 }

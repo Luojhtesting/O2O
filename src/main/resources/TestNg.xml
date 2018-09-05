@@ -16,6 +16,8 @@
                 <include name = "getGoodsListSuccess"/>
                 <include name = "getGoodsListGroupSuccess"/>
                 <include name = "viewGoodsListSuccess"/>
+                <include name = "setAdvertisingGoodsListSuccess"/>
+                <include name = "getAdvertisingGoodsListSuccess"/>
             </methods>
         </class>
     </classes>

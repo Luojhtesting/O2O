@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.mongodb.util.JSON;
 import com.to8to.o2o.configuration.Contans;
 import com.to8to.o2o.testScripts.goods.TestCaseGoodsBusinessForUI;
+import com.to8to.o2o.util.FileUtil;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -21,22 +22,17 @@ import static org.hamcrest.Matchers.*;
 public class TestCase {
 
     @Test
-    public void onShelvesGoodsSuccess() {
-        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
-        String jsonString = fileReadData(jsonFile);
+    public void getAdvertisingGoodsListSuccess() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/getAdvertisingGoodsListSuccess.json");
+        String jsonString = FileUtil.fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
-        TestCaseGoodsBusinessForUI tb = new TestCaseGoodsBusinessForUI();
-        tb.addGoodsSuccess();
-        tb.submitGoodsForReviewSuccess();
-        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("id", TestCaseGoodsBusinessForUI.result);
-        jo.getJSONObject("args").getJSONObject("shelvesGoodsDTO").put("shopId", Contans.shopId);
+        jo.getJSONObject("args").put("cityId", Contans.cityId);
         jsonString = jo.toString();
 
-        auditGoodsPassedSuccess();
         given()
                 .contentType("application/json")
                 .header("s","/biz/t8t-scm-oos/app")
-                .header("m","views.business.goodsServiceForUI.onShelvesGoods")
+                .header("m","views.business.HomePageManagerServiceForUI.getAdvertisingGoods")
                 .body(jsonString)
                 .when()
                 .post(Contans.Path_TestUrl)

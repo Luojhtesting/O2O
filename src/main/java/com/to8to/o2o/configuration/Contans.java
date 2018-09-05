@@ -17,5 +17,8 @@ public class Contans {
     //加盟shopId
     public static final Integer shopId = 1027;
 
+    //城市ID
+    public static final long cityId = 440300000000l;
+
 
 }
