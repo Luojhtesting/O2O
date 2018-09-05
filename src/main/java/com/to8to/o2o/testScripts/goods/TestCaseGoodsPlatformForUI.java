@@ -83,7 +83,7 @@ public class TestCaseGoodsPlatformForUI {
             .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
-            .prettyPeek()
+            //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
