@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import static com.to8to.o2o.testScripts.goods.TestCaseGoodsPlatformForUI.auditGoodsPassedSuccess;
 import static com.to8to.o2o.util.FileUtil.fileReadData;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
@@ -154,7 +153,7 @@ public class TestCaseGoodsBusinessForUI {
     @Test
     public void onShelvesGoodsSuccess() {
         submitGoodsForReviewSuccess();//调用提交审核测试用例
-        auditGoodsPassedSuccess();//调用审核通过测试用例
+        auditGoodsPassedAction();//调用审核通过测试用例
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
@@ -536,5 +535,27 @@ public class TestCaseGoodsBusinessForUI {
             .statusCode(200)
             .body("status",equalTo(200))
         ;
+    }
+
+    public static void auditGoodsPassedAction() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("goodsId", result[0]);
+        jsonString = jo.toString();
+
+        given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.platform.goodsServiceForUI.passedGoods")
+            .body(jsonString)
+        .when()
+            .post(Contans.Path_TestUrl)
+            //.prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        ;
+
     }
 }

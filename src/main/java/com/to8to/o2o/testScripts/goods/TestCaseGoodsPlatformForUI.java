@@ -69,7 +69,7 @@ public class TestCaseGoodsPlatformForUI {
      * 请求path oos/platform/goodsServiceForUI/passedGoods
      */
     @Test
-    public static void auditGoodsPassedSuccess() {
+    public void auditGoodsPassedSuccess() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
