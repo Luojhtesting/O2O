@@ -24,8 +24,10 @@
             <class name = "com.to8to.o2o.testScripts.goods.TestCaseGoodsCustomerForUI">
                 <methods>
                     <include name = "getGoodsListSuccess"/>
+                    <include name = "getHotGoodsListSuccess"/>
                     <include name = "getGoodsListGroupSuccess"/>
                     <include name = "viewGoodsListSuccess"/>
+                    <include name = "selectRecommendGoodsListSuccess"/>
                 </methods>
             </class>
         </classes>

@@ -1,0 +1,9 @@
+{
+  "args":{
+    "listGoodsDTO":{
+      "shopId":1
+    },
+    "page":1,
+    "size":20
+  }
+}

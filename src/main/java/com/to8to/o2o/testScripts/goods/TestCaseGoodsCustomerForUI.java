@@ -1,5 +1,6 @@
 package com.to8to.o2o.testScripts.goods;
 
+import com.mongodb.util.JSON;
 import com.to8to.o2o.configuration.Contans;
 import com.to8to.o2o.util.FileUtil;
 import org.json.JSONObject;
@@ -16,7 +17,7 @@ public class TestCaseGoodsCustomerForUI {
 
     /**
      * Title:必填项字段输入合法，非必填输入格式正确，获取商品列表成功
-     * 接口名称 "用户-获取商品列表" views.customer.goodsServiceForUI.listGoods
+     * 接口名称 "用户-获取店铺商品列表" views.customer.goodsServiceForUI.listGoods
      * 请求类型 Https-post
      * 请求path oos/customer/goodsServiceForUI/listGoods
      */
@@ -32,6 +33,34 @@ public class TestCaseGoodsCustomerForUI {
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.customer.goodsServiceForUI.listGoods")
+            .body(jsonString)
+        .when()
+            .post(Contans.Path_TestUrl)
+            //.prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        ;
+    }
+
+    /**
+     * Title:必填项字段输入合法，非必填输入格式正确，获取商品列表成功
+     * 接口名称 "用户-获取店铺热门商品列表" views.customer.goodsServiceForUI.listHotGoods
+     * 请求类型 Https-post
+     * 请求path oos/customer/goodsServiceForUI/listHotGoods
+     */
+    @Test
+    public void getHotGoodsListSuccess() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/customer/getHotGoodsListSuccess.json");
+        jsonString = FileUtil.fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("listGoodsDTO").put("shopId",Contans.shopId);
+        jsonString = jo.toString();
+
+        given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.customer.goodsServiceForUI.listHotGoods")
             .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
@@ -59,7 +88,7 @@ public class TestCaseGoodsCustomerForUI {
             .body(jsonFile)
         .when()
             .post(Contans.Path_TestUrl)
-            .prettyPeek()
+            //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
@@ -87,7 +116,7 @@ public class TestCaseGoodsCustomerForUI {
             .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
-            .prettyPeek()
+            //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
@@ -98,23 +127,27 @@ public class TestCaseGoodsCustomerForUI {
      * Title:必填项字段输入合法，非必填输入格式正确，配置推荐商品列表成功
      * 接口名称 "get淘便宜 商品列表" views.customer.homePageServiceForUI.selectRecommendGoods
      * 请求类型 Https-post
-     * 请求path oos/customer/goodsServiceForUI/selectRecommendGoods
+     * 请求path oos/customer/homePageServiceForUI/selectRecommendGoods
      */
     @Test
     public void selectRecommendGoodsListSuccess() {
-        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/selectRecommendGoodsListSuccess.json");
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/customer/selectRecommendGoodsListSuccess.json");
+        jsonString = FileUtil.fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("cityId",Contans.cityId);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
-            .header("m","views.customer.goodsServiceForUI.selectRecommendGoods")
-            .body(jsonFile)
+            .header("m","views.customer.homePageServiceForUI.selectRecommendGoods")
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
-            .prettyPeek()
+            //.prettyPeek()
         .then()
             .statusCode(200)
-            .body("",equalTo(""))
+            .body("status",equalTo(200))
         ;
     }
 
