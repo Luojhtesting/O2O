@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<suite name = "TestSuite">
-    <test name = "TestCase" preserve-order="true">
+<suite name = "O2OSuite">
+    <test name = "SmokeGoodsTestCase" preserve-order="true">
         <classes>
             <class name = "com.to8to.o2o.testScripts.goods.TestCaseGoodsBusinessForUI">
                 <methods>
@@ -28,6 +28,12 @@
                     <include name = "getGoodsListGroupSuccess"/>
                     <include name = "viewGoodsListSuccess"/>
                     <include name = "selectRecommendGoodsListSuccess"/>
+                </methods>
+            </class>
+
+            <class name = "com.to8to.o2o.testScripts.goods.TestCaseGoodsPlatformForUI">
+                <methods>
+                    <include name = "getGoodsListSuccess"/>
                 </methods>
             </class>
         </classes>
