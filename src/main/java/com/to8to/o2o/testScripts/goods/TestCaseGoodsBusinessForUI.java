@@ -441,7 +441,7 @@ public class TestCaseGoodsBusinessForUI {
 //        ;
 //    }
 
-    public static void addAction(int i) {
+    private static void addAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -468,7 +468,7 @@ public class TestCaseGoodsBusinessForUI {
         }
     }
 
-    public static void submitAction(int i) {
+    private static void submitAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -478,21 +478,21 @@ public class TestCaseGoodsBusinessForUI {
             jsonString = jo.toString();
 
             given()
-                    .contentType("application/json")
-                    .header("s","/biz/t8t-scm-oos/app")
-                    .header("m","views.business.goodsServiceForUI.submitGoods")
-                    .body(jsonString)
-                    .when()
-                    .post(Contans.Path_TestUrl)
-                    //.prettyPeek()
-                    .then()
-                    .statusCode(200)
-                    .body("status",equalTo(200))
+                .contentType("application/json")
+                .header("s","/biz/t8t-scm-oos/app")
+                .header("m","views.business.goodsServiceForUI.submitGoods")
+                .body(jsonString)
+            .when()
+                .post(Contans.Path_TestUrl)
+                //.prettyPeek()
+            .then()
+                .statusCode(200)
+                .body("status",equalTo(200))
             ;
         }
     }
 
-    public static void auditGoodsPassedAction(int i) {
+    private static void auditGoodsPassedAction(int i) {
         for (int j=0;j<i;j++) {
             File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
             jsonString = fileReadData(jsonFile);
@@ -515,7 +515,7 @@ public class TestCaseGoodsBusinessForUI {
         }
     }
 
-    public static void onShelvesGoodsAction() {
+    private static void onShelvesGoodsAction() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/business/onShelvesGoodsSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
@@ -537,7 +537,7 @@ public class TestCaseGoodsBusinessForUI {
         ;
     }
 
-    public static void auditGoodsPassedAction() {
+    private static void auditGoodsPassedAction() {
         File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);

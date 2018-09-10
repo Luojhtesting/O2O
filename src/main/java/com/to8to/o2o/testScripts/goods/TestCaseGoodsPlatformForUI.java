@@ -1,6 +1,7 @@
 package com.to8to.o2o.testScripts.goods;
 
 import com.to8to.o2o.configuration.Contans;
+import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TestCaseGoodsPlatformForUI {
 
+    private static int result;
     private static String jsonString;//文件内容
 
     /**
@@ -70,10 +72,12 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void auditGoodsPassedSuccess() {
+        addAction();//调用添加商品Action
+        submitAction();//调用提交审核Action
         File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsPassedSuccess.json");
         jsonString = fileReadData(jsonFile);
         JSONObject jo = new JSONObject(jsonString);
-        jo.getJSONObject("args").put("goodsId", TestCaseGoodsBusinessForUI.result[0]);
+        jo.getJSONObject("args").put("goodsId", result);
         jsonString = jo.toString();
 
         given()
@@ -83,7 +87,7 @@ public class TestCaseGoodsPlatformForUI {
             .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
-            //.prettyPeek()
+            .prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
@@ -98,13 +102,19 @@ public class TestCaseGoodsPlatformForUI {
      */
     @Test
     public void auditGoodsRejectSuccess() {
+        addAction();
+        submitAction();
         File jsonFile = new File("./src/main/resources/goodsFile-Json/platform/auditGoodsRejectSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").put("goodsId", result);
+        jsonString = jo.toString();
 
         given()
             .contentType("application/json")
             .header("s","/biz/t8t-scm-oos/app")
             .header("m","views.platform.goodsServiceForUI.rejectGoods")
-            .body(jsonFile)
+            .body(jsonString)
         .when()
             .post(Contans.Path_TestUrl)
             .prettyPeek()
@@ -180,6 +190,53 @@ public class TestCaseGoodsPlatformForUI {
         .when()
             .post(Contans.Path_TestUrl)
             .prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        ;
+    }
+
+    private void addAction() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/addGoodsSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("createGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
+
+        Response response = given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.business.goodsServiceForUI.addGoods")
+            .body(jsonString)
+        .when()
+            .post(Contans.Path_TestUrl)
+            //.prettyPeek()
+        .then()
+            .statusCode(200)
+            .body("status",equalTo(200))
+        .extract()
+            .response()
+            ;
+
+        result = response.path("result");
+    }
+
+    private void submitAction() {
+        File jsonFile = new File("./src/main/resources/goodsFile-Json/business/submitGoodsForReviewSuccess.json");
+        jsonString = fileReadData(jsonFile);
+        JSONObject jo = new JSONObject(jsonString);
+        jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("id", result);
+        jo.getJSONObject("args").getJSONObject("submitGoodsDTO").put("shopId", Contans.shopId);
+        jsonString = jo.toString();
+
+        given()
+            .contentType("application/json")
+            .header("s","/biz/t8t-scm-oos/app")
+            .header("m","views.business.goodsServiceForUI.submitGoods")
+            .body(jsonString)
+        .when()
+            .post(Contans.Path_TestUrl)
+            //.prettyPeek()
         .then()
             .statusCode(200)
             .body("status",equalTo(200))
